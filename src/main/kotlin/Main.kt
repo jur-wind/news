@@ -14,7 +14,6 @@ data class NewsItem(
     val timestamp: LocalDateTime,
 )
 
-
 fun main() {
     // 1. Create news
     val lorem: Lorem = LoremIpsum.getInstance()
