@@ -13,13 +13,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up JDK
-        uses: actions/setup-java@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
+          distribution: 'adopt'
           java-version: '11'
 
-      - name: Build and Run
-        run: |
-          ./gradlew build
-          ./gradlew run
+      - name: Install Kotlin
+        run: sudo apt-get install -y kotlin
+
+      - name: Compile Kotlin file
+        run: kotlinc src/main/kotlin/Main.kt -include-runtime -d main.jar
+
+      - name: Run Kotlin file
+        run: java -jar main.jar
