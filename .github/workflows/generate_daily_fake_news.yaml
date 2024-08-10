@@ -19,11 +19,21 @@ jobs:
           distribution: 'adopt'
           java-version: '11'
 
-      - name: Install Kotlin
-        run: sudo apt-get install -y kotlin
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
 
-      - name: Compile Kotlin file
-        run: kotlinc src/main/kotlin/Main.kt -include-runtime -d main.jar
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
 
-      - name: Run Kotlin file
-        run: java -jar main.jar
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Run the application
+        run: ./gradlew run
