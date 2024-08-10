@@ -16,7 +16,7 @@ dependencies {
 }
 
 application {
-    mainClass.set("nl.jurwind.MainKt") // Replace with your main class
+    mainClass.set("nl.jurwind.MainKt")
 }
 
 tasks.test {
