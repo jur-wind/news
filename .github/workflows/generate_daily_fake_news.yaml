@@ -19,9 +19,6 @@ jobs:
           distribution: 'adopt'
           java-version: '11'
 
-      - name: Install git
-        run: sudo apt-get install -y git
-
       - name: Cache Gradle packages
         uses: actions/cache@v3
         with:
@@ -32,6 +29,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
+      - name: Set up Git user
+        run: |
+          git config --local user.name "Jur Wind"
+          git config --local user.email "jurdefur@gmail.com"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
@@ -40,18 +44,16 @@ jobs:
 
       - name: Run the application
         run: ./gradlew run
-
-      - name: Set up Git user
-        run: |
-          git config --global user.name "Jur Wind"
-          git config --global user.email "jurdefur@gmail.com"
-
-      - name: Commit changes
-        run: |
-          git add .
-          git commit -m "Add daily fake news article"
-      - name: Push changes
-        run: |
-          git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+#      - name: Commit changes
+#        run: |
+#          git add .
+#          git commit -m "Add daily fake news article"
+#
+#      - name: Push changes
+#        run: |
+#          git push
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -48,7 +48,7 @@ fun main() {
     }
 
     // 5. Push commit
-    ProcessBuilder("git", "commit", "-a", "-m", commitMessage).start().let { process ->
+    ProcessBuilder("git", "push").start().let { process ->
         val result = String(process.inputStream.readAllBytes())
         println(result)
     }
