@@ -41,12 +41,17 @@ jobs:
       - name: Run the application
         run: ./gradlew run
 
-      - name: Commit and push changes
+      - name: Set up Git user
         run: |
-          git config --local user.email "jurdefur@gmail.com"
-          git config --local user.name "Jur Wind"
+          git config --global user.name "Jur Wind"
+          git config --global user.email "jurdefur@gmail.com"
+
+      - name: Commit changes
+        run: |
           git add .
           git commit -m "Add daily fake news article"
+      - name: Push changes
+        run: |
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
