@@ -19,6 +19,9 @@ jobs:
           distribution: 'adopt'
           java-version: '11'
 
+      - name: Install git
+        run: sudo apt-get install -y git
+
       - name: Cache Gradle packages
         uses: actions/cache@v3
         with:
@@ -40,8 +43,10 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          git config --local user.email "github@jurwind.nl"
+          git config --local user.email "jurdefur@gmail.com"
           git config --local user.name "Jur Wind"
           git add .
           git commit -m "Add daily fake news article"
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
