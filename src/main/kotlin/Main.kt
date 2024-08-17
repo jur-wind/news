@@ -40,14 +40,21 @@ fun main() {
         writer.append(newsItem.content)
     }
 
-    // 4. Commit for today
+    // 4. Add new files
+    val commitMessage = "${newsItem.timestamp.format(fileFormatter)} - ${newsItem.title}"
+    ProcessBuilder("git", "add", ".").start().let { process: Process ->
+        val result = String(process.inputStream.readAllBytes())
+        println(result)
+    }
+
+    // 5. Commit for today
     val commitMessage = "${newsItem.timestamp.format(fileFormatter)} - ${newsItem.title}"
     ProcessBuilder("git", "commit", "-a", "-m", commitMessage).start().let { process: Process ->
         val result = String(process.inputStream.readAllBytes())
         println(result)
     }
 
-    // 5. Push commit
+    // 6. Push commit
     ProcessBuilder("git", "push").start().let { process ->
         val result = String(process.inputStream.readAllBytes())
         println(result)
