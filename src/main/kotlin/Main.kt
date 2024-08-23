@@ -41,7 +41,6 @@ fun main() {
     }
 
     // 4. Add new files
-    val commitMessage = "${newsItem.timestamp.format(fileFormatter)} - ${newsItem.title}"
     ProcessBuilder("git", "add", ".").start().let { process: Process ->
         val result = String(process.inputStream.readAllBytes())
         println(result)
