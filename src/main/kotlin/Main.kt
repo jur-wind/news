@@ -15,6 +15,12 @@ data class NewsItem(
 )
 
 fun main() {
+    for (i in 0..(1..5).random()) {
+        generateNews()
+    }
+}
+
+private fun generateNews() {
     // 1. Create news
     val lorem: Lorem = LoremIpsum.getInstance()
     val newsItem = NewsItem(
