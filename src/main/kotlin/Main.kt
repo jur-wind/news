@@ -44,6 +44,7 @@ private fun generateNews() {
         writer.append("## ${newsItem.title}")
         writer.newLine()
         writer.append(newsItem.content)
+        writer.newLine()
     }
 
     // 4. Add new files
